@@ -23,7 +23,7 @@ app.use(
   })
 );
 
-const passport = require("./middleware/passport");
+const passport = require("./middleware/passportMiddleware");
 const authRoute = require("./routes/authRoute");
 const indexRoute = require("./routes/indexRoute");
 
