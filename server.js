@@ -18,9 +18,9 @@ app.use(session({
         maxAge: 24 * 60 * 60 * 1000,
     },
 }));
-const passport = require("./middleware/passportMiddleware");
 const authRoute = require("./routes/authRoute");
 const indexRoute = require("./routes/indexRoute");
+const passport = require("./middleware/passport");
 // Middleware for express
 app.use(express.json());
 app.use(expressLayouts);
@@ -33,7 +33,7 @@ app.use((req, res, next) => {
     console.log("Entire session object:");
     console.log(req.session);
     console.log(`Session details are: `);
-    console.log(req.session.passport);
+    // console.log(req.session.passport);
     next();
 });
 app.use("/", indexRoute);

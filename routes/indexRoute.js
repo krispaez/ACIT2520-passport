@@ -15,3 +15,4 @@ router.get("/dashboard", checkAuth_1.ensureAuthenticated, (req, res) => {
     });
 });
 exports.default = router;
+module.exports = router;

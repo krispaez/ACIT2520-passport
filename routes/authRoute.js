@@ -23,3 +23,4 @@ router.get("/logout", (req, res) => {
     res.redirect("/auth/login");
 });
 exports.default = router;
+module.exports = router;
