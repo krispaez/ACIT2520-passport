@@ -1,10 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 
-const express = require("express");
-const expressLayouts = require("express-ejs-layouts");
-const session = require("express-session");
-const path = require("path");
-const port = process.env.port || 5000;
+import express from "express";
+import expressLayouts from "express-ejs-layouts";
+import session from "express-session";
+import path from "path";
+import passportMiddleware from './middleware/passportMiddleware';
+
+const port = process.env.port || 8000;
 
 const app = express();
 
@@ -23,16 +25,14 @@ app.use(
   })
 );
 
-const authRoute = require("./routes/authRoute");
-const indexRoute = require("./routes/indexRoute");
-const passport = require("./middleware/passport");
+import authRoute from "./routes/authRoute";
+import indexRoute from "./routes/indexRoute";
 
 // Middleware for express
 app.use(express.json());
 app.use(expressLayouts);
 app.use(express.urlencoded({ extended: true }));
-app.use(passport.initialize());
-app.use(passport.session());
+passportMiddleware(app);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   console.log(`User details are: `);
@@ -42,7 +42,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   console.log(req.session);
 
   console.log(`Session details are: `);
-  // console.log(req.session.passport);
+  console.log((req.session as any).passport);
   next();
 });
 

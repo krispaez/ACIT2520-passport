@@ -19,12 +19,15 @@ const localStrategy = new LocalStrategy(
   }
 );
 
-passport.serializeUser((user: Express.User, done: (err: any, id?: number) => void ) => {
+passport.serializeUser((
+      user: Express.User, 
+      done: (err: any, id?: number) => void
+    ) => {
         done(null, user.id);
-})
+});
 
 /*
-TODO: FIX ME (types) 😭
+FIXED TYPES
 */
 passport.deserializeUser(function (id: number, done: any) {
   let user = getUserById(id);
